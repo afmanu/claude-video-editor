@@ -9,7 +9,7 @@ Hay dos formas de usarla. Puedes empezar por la primera y pasar a la segunda cua
 Claude planifica la edición completa y tú la montas en tu editor de siempre (CapCut, Premiere, DaVinci…).
 
 1. Entra en claude.ai → **Ajustes → Capacidades** y activa **Skills** (y "Ejecución de código" si te lo pide).
-2. En la sección Skills, pulsa **Subir skill** y elige el archivo `editor-video-pro.skill`.
+2. En la sección Skills, pulsa **Subir skill** y elige el archivo `editor-video-pro.zip` sin descomprimirlo.
 3. Abre un chat (mejor dentro de un **Proyecto** para que recuerde tu estilo) y escribe:
    > Quiero editar mis vídeos con la skill editor-video-pro. Empecemos por mi identidad visual.
 4. Cuando tengas tu identidad, Claude te dará `identidad.md`. Pégalo en las instrucciones del proyecto o súbelo como archivo del proyecto.
@@ -32,7 +32,7 @@ Después de instalar ffmpeg, cierra y abre la terminal. Comprueba que todo está
 
 ### Instalar la skill
 
-1. Descomprime `editor-video-pro.skill` (es un zip; si tu sistema no lo abre, cámbiale la extensión a `.zip`).
+1. Descomprime `editor-video-pro.zip`.
 2. Copia la carpeta `editor-video-pro` a:
    - Windows: `C:\Users\<tu-usuario>\.claude\skills\`
    - Mac / Linux: `~/.claude/skills/`
