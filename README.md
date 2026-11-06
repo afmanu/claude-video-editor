@@ -6,8 +6,8 @@ El sistema trabaja con tu propia identidad visual. No impone una plantilla ni re
 
 ## Descargas
 
-- [Descargar la skill en ZIP](./editor-video-pro.zip?raw=1) — formato recomendado para subirla a Claude.
-- [Descargar la skill con extensión `.skill`](./editor-video-pro.skill?raw=1) — el mismo ZIP, útil para instalación manual y compatible con la guía visual.
+- [Descargar la skill en ZIP](./dist/editor-video-pro.zip?raw=1) — formato recomendado para subirla a Claude.
+- [Descargar la skill con extensión `.skill`](./dist/editor-video-pro.skill?raw=1) — el mismo ZIP, útil para instalación manual y compatible con la guía visual.
 - [Descargar la guía de instalación en PDF](./docs/guia-instalacion-editor-video-pro.pdf?raw=1).
 - [Verificar las descargas con SHA-256](./SHA256SUMS).
 
@@ -34,7 +34,7 @@ El sistema trabaja con tu propia identidad visual. No impone una plantilla ni re
 
 ### Claude web o app
 
-1. Descarga [`editor-video-pro.zip`](./editor-video-pro.zip?raw=1).
+1. Descarga [`editor-video-pro.zip`](./dist/editor-video-pro.zip?raw=1).
 2. Abre la sección de Skills de Claude.
 3. Crea una skill y sube el ZIP sin descomprimirlo.
 4. Actívala y escribe:
@@ -68,19 +68,19 @@ También puedes incluirla en un proyecto compartido bajo `.claude/skills/editor-
 
 ```text
 editor-video-pro/
-  editor-video-pro/
-    SKILL.md
-    GUIA.md
-    assets/
-    references/
-    scripts/
+  SKILL.md
+  GUIA.md
+  assets/
+  references/
+  scripts/
 docs/
   guia-instalacion-editor-video-pro.pdf
-editor-video-pro.zip
-editor-video-pro.skill
+dist/
+  editor-video-pro.zip
+  editor-video-pro.skill
 ```
 
-La segunda carpeta `editor-video-pro` es la raíz real de la skill. Los paquetes descargables ya contienen la estructura correcta y no requieren reorganizar archivos.
+`editor-video-pro/` contiene únicamente el código fuente de la skill. `docs/` reúne la documentación descargable y `dist/` los paquetes listos para instalar.
 
 ## Seguridad y privacidad
 

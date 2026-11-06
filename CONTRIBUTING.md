@@ -14,7 +14,7 @@ Gracias por ayudar a mejorar Editor de vídeo pro.
 Si modificas los scripts, valida su sintaxis:
 
 ```bash
-for file in editor-video-pro/editor-video-pro/scripts/*.mjs; do node --check "$file"; done
+for file in editor-video-pro/scripts/*.mjs; do node --check "$file"; done
 ```
 
 Si modificas la instalación o los requisitos, actualiza también el README, `GUIA.md` y la guía visual cuando corresponda.
