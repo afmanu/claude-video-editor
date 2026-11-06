@@ -1,0 +1,76 @@
+{
+  "formato": "reel",
+  "duracion": 18.93,
+  "aroll": {
+    "src": "assets/aroll.mp4"
+  },
+  "enfasis": [
+    "Claude"
+  ],
+  "beats": [
+    {
+      "t": 0,
+      "modo": "cara",
+      "tipo": "titular",
+      "texto": "Editado *entero* con IA",
+      "grande": false
+    },
+    {
+      "t": 3,
+      "modo": "dividida",
+      "tipo": "prompt",
+      "etiqueta": "Paso 1",
+      "texto": "Edita este vídeo y quita los silencios",
+      "resultado": "Vídeo montado en 2 min",
+      "t_resultado": 7.5
+    },
+    {
+      "t": 10.9,
+      "modo": "dividida",
+      "tipo": "lista",
+      "titulo": "Lo que hace *solo*",
+      "items": [
+        {
+          "texto": "Corta silencios",
+          "t": 11.3
+        },
+        {
+          "texto": "Quita tomas repetidas",
+          "t": 12.2
+        },
+        {
+          "texto": "Pone subtítulos",
+          "t": 13.2,
+          "estado": "bien"
+        }
+      ]
+    },
+    {
+      "t": 13.4,
+      "modo": "grafico",
+      "tipo": "cifra",
+      "de": 0,
+      "hasta": 120,
+      "sufijo": " min",
+      "texto": "ahorrados por vídeo"
+    },
+    {
+      "t": 16,
+      "modo": "dividida",
+      "tipo": "flujo",
+      "pasos": [
+        "Bruto",
+        "Claude",
+        "Reel listo"
+      ]
+    }
+  ],
+  "subtitulos": [
+    ["Esto", 0.08, 0.456],
+    ["lo", 0.476, 0.851],
+    ["he", 0.871, 1.247],
+    ["editado", 1.267, 1.643],
+    ["entero", 1.663, 2.039],
+    ["con", 2.059, 2.434]
+  ]
+}

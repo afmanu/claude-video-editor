@@ -1,0 +1,48 @@
+{
+  "nombre": "Ejemplo (cámbialo en el paso 0)",
+  "tema": "oscuro",
+  "colores": {
+    "fondo": "#101418",
+    "fondo2": "#1A2027",
+    "texto": "#F2F4F7",
+    "secundario": "#93A1B0",
+    "acento": "#2FD4C4",
+    "enfasis": "#FFC145",
+    "bien": "#4ADE80",
+    "mal": "#F87171"
+  },
+  "fuentes": {
+    "titular": {
+      "familia": "Space Grotesk",
+      "peso": 700,
+      "archivo": "assets/fonts/SpaceGrotesk-700.woff2"
+    },
+    "ui": {
+      "familia": "Inter",
+      "peso": 500,
+      "archivo": "assets/fonts/Inter-500.woff2"
+    },
+    "mono": {
+      "familia": "JetBrains Mono",
+      "peso": 500,
+      "archivo": "assets/fonts/JetBrainsMono-500.woff2"
+    }
+  },
+  "fondo": {
+    "tipo": "puntos",
+    "grano": true,
+    "vineta": true
+  },
+  "tarjeta": {
+    "estilo": "borde",
+    "radio": 14
+  },
+  "subtitulo": {
+    "estilo": "caja",
+    "palabras": 3,
+    "tamano": 68,
+    "altura": 0.64
+  },
+  "movimiento": "preciso",
+  "firma": "Las cifras aparecen siempre en el color de énfasis, solas en pantalla."
+}
