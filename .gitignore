@@ -1,0 +1,14 @@
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+**/node_modules/
+**/tmp/
+**/brutos/
+**/renders/
+**/entrega/
+
+*.log
+.env
+.env.*
+!.env.example
