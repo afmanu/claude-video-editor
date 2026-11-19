@@ -17,7 +17,9 @@ Si modificas los scripts, valida su sintaxis:
 for file in editor-video-pro/scripts/*.mjs; do node --check "$file"; done
 ```
 
-Si modificas la instalación o los requisitos, actualiza también el README, `GUIA.md` y la guía visual cuando corresponda.
+Si cambias algo que dependa de herramientas externas, ejecuta también `node editor-video-pro/scripts/doctor.mjs` y adjunta su salida.
+
+Si modificas la instalación o los requisitos, actualiza también el README, `GUIA.md`, `CHANGELOG.md` y la guía visual cuando corresponda.
 
 ## Informar de un problema
 
@@ -25,6 +27,7 @@ Incluye:
 
 - Sistema operativo.
 - Versiones de Node.js, ffmpeg y Claude Code.
+- Salida de `node editor-video-pro/scripts/doctor.mjs`.
 - Comando ejecutado.
 - Resultado esperado y resultado obtenido.
 - Fragmento mínimo del error, sin rutas privadas ni datos personales.

@@ -2,16 +2,37 @@
 
 Todo se ejecuta desde la carpeta del proyecto del vídeo (una carpeta por vídeo). `<skill>` es la carpeta donde está instalada esta skill.
 
+## Antes de empezar
+
+```bash
+node <skill>/scripts/doctor.mjs          # comprueba Node, ffmpeg, HyperFrames, Parakeet y el navegador
+node <skill>/scripts/empezar.mjs mi-reel # crea la carpeta del vídeo (y mi-estilo/ si no existe)
+```
+
+`doctor.mjs` dice qué falta y cómo instalarlo. Ejecútalo la primera vez y siempre que algo falle sin motivo claro. `empezar.mjs` no sobrescribe nada que ya exista.
+
+## Estructura de la carpeta de trabajo
+
+```
+estudio/                         ← carpeta de trabajo
+  identidad.json, identidad.md   ← la identidad de la persona (paso 0)
+  mi-estilo/  MI-ESTILO.md, referencias/   ← cuestionario y vídeos de referencia (opcional)
+  mi-reel/                       ← una carpeta por vídeo
+```
+
 ## Estructura de un proyecto
 
 ```
 mi-reel/
   identidad.json, identidad.md   ← copia de la identidad de la persona (paso 0)
+  brutos/                        ← el vídeo original
+  objetivo/                      ← opcional: UN vídeo al que debe parecerse (referencias.md § 4) y OBJETIVO.md
+  CAMBIOS.md                     ← una línea por versión: qué cambió y por qué
   beats.json                     ← storyboard: qué gráfico va en cada momento
   EDL.md                         ← lista de cortes para revisar
   index.html                     ← composición generada (no se edita a mano)
   assets/  bruto.json, transcript.json, piezas.json, aroll.mp4, cortes.json, fonts/, sfx/, gsap.min.js
-  renders/ hoja.jpg, borrador.mp4
+  renders/ hoja.jpg, borrador-v01.mp4, borrador-v02.mp4…
   entrega/ final.mp4
 ```
 
@@ -63,7 +84,8 @@ Vuelve a transcribir el A-roll montado (tiempos exactos de la línea de tiempo f
 
 ## 5. Storyboard y montaje
 
-1. Escribe los `beats` en `beats.json` siguiendo `componentes.md`. Enséñalos como tabla (tiempo · frase · modo · componente) y espera el visto bueno.
+0. Si hay vídeo en `objetivo/`, antes del storyboard: `node <skill>/scripts/referencias.mjs objetivo` y escribe `objetivo/OBJETIVO.md` (`referencias.md` § 4).
+1. Escribe los `beats` en `beats.json` siguiendo `componentes.md`. Enséñalos como tabla (tiempo · frase · modo · componente, más "Del objetivo" si lo hay) y espera el visto bueno.
 2. Copia `identidad.json` al proyecto y las fuentes que indica a `assets/fonts/` (descárgalas de Google Fonts en `.woff2`; si solo hay `.ttf`, también vale cambiando el `format`).
 3. Efectos de sonido (opcionales): descarga de Pixabay los que quieras y guárdalos con estos nombres en `assets/sfx/`: `impacto.mp3`, `whoosh.mp3`, `pop.mp3`, `campana.mp3`, `teclado.mp3`. Los que falten se omiten.
 4. Monta:
@@ -80,13 +102,14 @@ Mira la hoja de snapshots de verdad: texto cortado, gráfico encima de la cara, 
 
 ```bash
 npx hyperframes preview .                        # vista previa en el navegador
-npx hyperframes render . --quality draft -o renders/borrador.mp4
-node <skill>/scripts/hoja.mjs renders/borrador.mp4 1.5 6 12 20
+npx hyperframes render . --quality draft -o renders/borrador-v01.mp4
+node <skill>/scripts/hoja.mjs renders/borrador-v01.mp4 1.5 6 12 20
 npx hyperframes render . --quality delivery -o renders/master.mp4
 node <skill>/scripts/exportar.mjs renders/master.mp4 entrega/final.mp4
 ```
 
 - La persona aprueba la vista previa antes del render y el borrador antes del final.
+- **Versiones:** cada borrador nuevo sube el número (`-v02`, `-v03`…) y nunca sobrescribe el anterior, para poder comparar. Añade a `CAMBIOS.md` una línea por versión: qué cambió y por qué ("v02: subtítulos más grandes, lo pidió la persona").
 - `exportar.mjs` mide el volumen y lo deja en -14 LUFS con limitador (dos pasadas), H.264 a 14 Mbps, 30 fps y `faststart` para redes.
 
 ## 7. YouTube 16:9
@@ -97,6 +120,7 @@ node <skill>/scripts/exportar.mjs renders/master.mp4 entrega/final.mp4
 
 | Síntoma | Causa | Arreglo |
 |---|---|---|
+| Algo falla y no sabes por qué | Falta una herramienta | `node <skill>/scripts/doctor.mjs` |
 | `ffmpeg` no se encuentra | No está en el PATH | Reinstala o abre una terminal nueva (en Windows, winget no actualiza el PATH hasta reiniciar) |
 | La transcripción falla | El modelo no se pudo descargar | Revisa la conexión y prueba `npx hyperframes transcribe assets/audio16k.wav --language es` |
 | Fotogramas negros al final | Duración mal puesta | `duracion` en `beats.json` debe ser la del `aroll.mp4` (la escribe `subtitulos.mjs`) |

@@ -17,7 +17,13 @@ No trae un estilo de serie. Trae un **método**, y el estilo lo pones tú en el 
 >
 > Y recuerda: **todo se puede cambiar cuando quieras**. Colores, fuentes, subtítulos, ritmo, efectos de sonido o cualquier regla de edición. Solo dímelo ("quiero los subtítulos más grandes", "cambia el verde por un azul", "no quiero efectos de sonido") y lo ajusto.
 
-Después haz la entrevista de `references/identidad.md`, enseña la propuesta y, cuando la persona la apruebe, guarda `identidad.json` e `identidad.md`. Todo lo visual sale de ahí: colores, fuentes, fondo, estilo de subtítulo y personalidad del movimiento. Al terminar, recuérdale en una frase que puede cambiar cualquier cosa cuando quiera y pregúntale si quiere editar ya su primer vídeo.
+Después ofrece los **tres caminos** de `references/identidad.md` § 1 (se pueden combinar):
+
+- **Cuestionario:** la persona rellena `MI-ESTILO.md` (en Claude Code, `node <skill>/scripts/empezar.mjs` lo copia a `mi-estilo/`; en claude.ai, dale el texto para que lo copie, lo rellene y lo pegue).
+- **Referencias:** deja 2 o 3 vídeos que le gusten en `mi-estilo/referencias/` (en claude.ai, capturas y enlaces). Se analizan con `references/referencias.md`.
+- **Entrevista:** las preguntas en el chat, como siempre.
+
+Si al empezar ya existen `mi-estilo/MI-ESTILO.md` o vídeos en `mi-estilo/referencias/`, o la persona pega el cuestionario, úsalos directamente y pregunta solo lo que falte. Con todo eso, enseña la propuesta y, cuando la persona la apruebe, guarda `identidad.json` e `identidad.md`. Todo lo visual sale de ahí: colores, fuentes, fondo, estilo de subtítulo y personalidad del movimiento. Al terminar, recuérdale en una frase que puede cambiar cualquier cosa cuando quiera y pregúntale si quiere editar ya su primer vídeo.
 
 **Personalizar después.** La persona puede cambiar su identidad o cualquier regla de esta skill en cualquier momento. Si pide un cambio de estilo, edita `identidad.json`/`identidad.md`. Si pide cambiar una regla de edición (por ejemplo, "quiero subtítulos de una sola palabra" o "no cortes las pausas dramáticas"), anótalo en la sección "Mis preferencias" de `identidad.md` y respétalo por encima de las reglas por defecto de esta skill.
 
@@ -38,6 +44,8 @@ Si en claude.ai la persona quiere el vídeo terminado sin tocar un editor, expl�
 |---|---|
 | Siempre | Este archivo + `references/principios.md` |
 | Crear o cambiar la identidad | `references/identidad.md` |
+| Aprender de vídeos de referencia o imitar un vídeo objetivo | `references/referencias.md` |
+| Comprobar la instalación (Claude Code) | `node <skill>/scripts/doctor.mjs` |
 | Elegir qué gráfico va en cada momento | `references/componentes.md` |
 | Cortar, montar y renderizar (Claude Code) | `references/pipeline.md` |
 | Trabajar desde el chat (claude.ai) | `references/modo-chat.md` |
@@ -47,12 +55,12 @@ Si en claude.ai la persona quiere el vídeo terminado sin tocar un editor, expl�
 
 Cada paso termina en un punto de control humano. Claude no "ve" el ritmo como una persona: lo que no se aprueba no se da por bueno, y el silencio no es aprobación.
 
-1. **Brief.** Formato (reel 9:16 o YouTube 16:9), duración objetivo, tema, frase del gancho y qué se pide al final (seguir, guardar, comentar una palabra, votar). Si falta el cierre, propónlo.
+1. **Brief.** Formato (reel 9:16 o YouTube 16:9), duración objetivo, tema, frase del gancho y qué se pide al final (seguir, guardar, comentar una palabra, votar). Si falta el cierre, propónlo. Pregunta si hay un **vídeo objetivo** al que quiera que se parezca (en Claude Code, en `objetivo/` del vídeo; en claude.ai, capturas y enlace): si lo hay, desmóntalo con `references/referencias.md` § 4 antes del storyboard.
 2. **Transcripción con tiempos por palabra.** Antes de planificar, comprueba que el bruto habla del tema del brief. Si no coincide, para y pregunta.
 3. **Lista de cortes (EDL).** Quita silencios, muletillas y tomas repetidas (por defecto se queda la última toma buena). Corta en momentos en los que la persona mira a cámara. Enseña la tabla con tiempos y el texto eliminado. **Control 1:** la persona aprueba o corrige.
-4. **Storyboard (`beats.json`).** Divide el vídeo en beats (una idea cada uno) y elige para cada beat el componente que lo demuestra (`references/componentes.md`). Aquí se decide el diseño, no al programar. **Control 2:** la persona revisa la ficha.
+4. **Storyboard (`beats.json`).** Divide el vídeo en beats (una idea cada uno) y elige para cada beat el componente que lo demuestra (`references/componentes.md`). Aquí se decide el diseño, no al programar. Si hay vídeo objetivo, la ficha lleva la columna "Del objetivo". **Control 2:** la persona revisa la ficha.
 5. **Montaje.** Construye la composición con la identidad. En Claude Code, `scripts/montar.mjs` convierte `beats.json` en la composición.
-6. **Vista previa y borrador.** Enseña la vista previa o un render en borrador. Extrae un fotograma por beat y míralo de verdad antes de enseñarlo. **Control 3.**
+6. **Vista previa y borrador.** Enseña la vista previa o un render en borrador. Extrae un fotograma por beat y míralo de verdad antes de enseñarlo. Cada borrador nuevo es una versión nueva (`-v01`, `-v02`…) y su cambio se anota en `CAMBIOS.md`. **Control 3.**
 7. **Final.** Render de entrega, audio a -14 LUFS y `references/checklist.md` completo.
 
 Cuando un resultado guste especialmente, propón anotar en `identidad.md` lo que lo hizo funcionar. El estilo de cada persona mejora con cada vídeo.
@@ -75,7 +83,7 @@ El detalle está en `references/principios.md`.
 ## Herramientas (todas gratis y con uso comercial)
 
 - **ffmpeg** para cortar, convertir y exportar.
-- **HyperFrames** (`npx hyperframes`) para componer los gráficos en HTML + GSAP, previsualizar y renderizar. También transcribe (`npx hyperframes transcribe`).
+- **HyperFrames** (`npx hyperframes`) para componer los gráficos en HTML + GSAP, previsualizar y renderizar. También transcribe en local con Parakeet (`npx hyperframes transcribe --engine parakeet`), que entiende español.
 - **GSAP** para la animación (gratuito, incluido el uso comercial).
 - **Fuentes de Google Fonts** con licencia OFL, descargadas en local.
 - **Iconos Lucide** (licencia ISC).
@@ -85,7 +93,8 @@ No uses música, fuentes, plantillas ni logos sin licencia clara para uso comerc
 
 ## Lo que esta skill no hace
 
-- No copia el estilo de ningún creador: se estudian técnicas y ritmo, no identidades.
+- No copia el estilo de ningún creador: se estudian técnicas y ritmo, no identidades. Las referencias y el vídeo objetivo nunca entran en el montaje.
+- No descarga vídeos de redes sociales: la persona trae sus propios archivos.
 - No usa transiciones de plantilla (estrellas, cortinillas, fundido a blanco en cada corte).
 - No pone música de fondo por defecto: la voz manda.
 - No da nada por terminado sin haber mirado los fotogramas.

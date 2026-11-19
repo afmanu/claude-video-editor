@@ -13,6 +13,15 @@ Para usar la skill solo necesitas estos dos archivos:
 
 No necesitas clonar el repositorio ni descargar las carpetas por separado.
 
+### Prepara tu estilo (opcional, 3 minutos)
+
+Antes de abrir Claude, junta dos cosas. Con ellas tu estilo sale a la primera:
+
+- **El cuestionario [`MI-ESTILO.md`](./editor-video-pro/MI-ESTILO.md)**: marca opciones y escribe lo que tengas claro. También está impreso en la guía PDF.
+- **2 o 3 vídeos que te gusten** y que se parezcan entre sí. Claude mide su ritmo, cómo empiezan, sus subtítulos y cómo cierran, y lo traduce a tu estilo. Nunca se usan en tus vídeos ni se copia la marca de nadie.
+
+Y en cada vídeo puedes darle un **vídeo objetivo**, uno concreto al que quieres que se parezca. Si no quieres preparar nada, Claude te hace las preguntas en el chat.
+
 | Dónde vas a usarla | Qué haces con el ZIP |
 |---|---|
 | Claude web o app | Lo subes directamente, sin descomprimir. |
@@ -22,7 +31,8 @@ No necesitas clonar el repositorio ni descargar las carpetas por separado.
 
 ## Qué hace
 
-- Define una identidad visual propia antes de editar.
+- Define una identidad visual propia antes de editar: con un cuestionario, con vídeos de referencia o con una entrevista.
+- Imita la estructura y el ritmo de un vídeo objetivo, sin copiar su marca.
 - Detecta silencios, muletillas y tomas repetidas.
 - Genera una lista de cortes para revisar antes del montaje.
 - Produce subtítulos y un storyboard por bloques.
@@ -48,6 +58,8 @@ No necesitas clonar el repositorio ni descargar las carpetas por separado.
 
    > Quiero editar mis vídeos con la skill editor-video-pro. Empecemos por mi identidad visual.
 
+   Si has rellenado `MI-ESTILO.md`, pégalo en ese mensaje. Si tienes referencias, sube unas capturas de cada una con su enlace.
+
 Consulta también la [documentación oficial de Skills de Claude](https://support.claude.com/es/articles/12512180-usar-habilidades-en-claude).
 
 ### Claude Code
@@ -58,6 +70,7 @@ Requisitos:
 - ffmpeg y ffprobe disponibles en el `PATH`.
 - Google Chrome para las vistas previas y el render.
 - Conexión a internet durante la primera descarga de HyperFrames y sus modelos.
+- El modelo de transcripción Parakeet (unos 640 MB, una vez): `npx hyperframes models install parakeet`. Si no lo instalas, se instala solo la primera vez que transcribas.
 
 Instalación personal:
 
@@ -65,9 +78,12 @@ Instalación personal:
 2. Copia la carpeta `editor-video-pro` resultante dentro de:
    - Windows: `C:\Users\<tu-usuario>\.claude\skills\`
    - macOS o Linux: `~/.claude/skills/`
-3. Abre Claude Code en la carpeta de tu vídeo y escribe:
+3. Abre Claude Code en tu carpeta de trabajo (por ejemplo `Videos/estudio`) y escribe:
 
-   > Usa la skill editor-video-pro. Primero definamos mi identidad visual.
+   > Usa la skill editor-video-pro. Comprueba mi equipo y prepara la carpeta.
+
+   Claude ejecuta `doctor.mjs`, que te dice qué falta instalar y cómo, y `empezar.mjs`, que crea `mi-estilo/` con el cuestionario y una carpeta `referencias/` para tus vídeos.
+4. Rellena el cuestionario, deja tus referencias y escribe *"Ya he rellenado mi estilo"*. O escribe *"Primero definamos mi identidad visual"* para hacerlo en el chat.
 
 También puedes incluirla en un proyecto compartido bajo `.claude/skills/editor-video-pro/`.
 
@@ -77,6 +93,7 @@ También puedes incluirla en un proyecto compartido bajo `.claude/skills/editor-
 editor-video-pro/
   SKILL.md
   GUIA.md
+  MI-ESTILO.md
   assets/
   references/
   scripts/
@@ -86,13 +103,15 @@ dist/
   editor-video-pro.zip
 ```
 
-`editor-video-pro/` contiene el código fuente, `docs/` la guía descargable y `dist/` el ZIP listo para instalar. Estas carpetas están pensadas para consultar o contribuir al proyecto; para usar la skill basta con las dos descargas del inicio.
+`editor-video-pro/` contiene el código fuente (los cambios de cada versión están en [CHANGELOG.md](./CHANGELOG.md)), `docs/` la guía descargable y `dist/` el ZIP listo para instalar. Estas carpetas están pensadas para consultar o contribuir al proyecto; para usar la skill basta con las dos descargas del inicio.
 
 ## Seguridad y privacidad
 
 La skill ejecuta herramientas locales como `ffmpeg`, `ffprobe`, Node.js y `npx hyperframes`. Revisa cualquier skill de terceros antes de activarla y trabaja con copias de tus vídeos originales.
 
 No publiques brutos, transcripciones, identidades visuales ni otros archivos con datos personales al informar de un problema.
+
+La skill no descarga vídeos de redes sociales. Las referencias y los vídeos objetivo los aportas tú, solo se usan para estudiarlos y nunca entran en el montaje.
 
 ## Contribuir
 
