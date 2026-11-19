@@ -79,10 +79,13 @@ Valores admitidos por `montar.mjs`:
 - `tema`: `oscuro` | `claro` (solo afecta a sombras y a la viñeta).
 - `fondo.tipo`: `liso` | `degradado` | `reticula` | `puntos` | `lineas`.
 - `tarjeta.estilo`: `cristal` | `solida` | `borde` | `papel`.
-- `subtitulo.estilo`: `pildora` | `color` | `subrayado` | `caja` | `resaltador`. `altura` es la posición vertical (0-1) del centro del subtítulo.
+- `subtitulo.estilo`: `pildora` | `color` | `subrayado` | `caja` | `resaltador`. `altura` es la posición vertical (0-1) del centro del subtítulo en modo cara (por defecto 0,72: por debajo de la boca y dentro de la zona segura). Con `tema: "claro"`, los subtítulos y titulares que van sobre la cara llevan una placa del color de fondo para que se lean.
 - `movimiento`: `suave` (entradas largas, sin rebote), `preciso` (rápido y seco, sin rebote) o `energico` (rápido, con un rebote ligero y más golpes de escala).
 - `fuentes.firma` (opcional): una segunda fuente para una sola palabra por titular, marcada con `*asteriscos*` en el texto.
 
 ## 5. `identidad.md`
 
-Resumen en prosa de media página: quién es, cómo quiere sonar y verse, la tabla de colores con su papel, las fuentes, la firma y la lista de "nunca". Añade al final una sección **"Aprendido en vídeos anteriores"** que se va llenando cuando algo funcione.
+Resumen en prosa de media página: quién es, cómo quiere sonar y verse, la tabla de colores con su papel, las fuentes, la firma y la lista de "nunca". Añade al final dos secciones:
+
+- **"Mis preferencias"**: cambios a las reglas por defecto que pida la persona (mandan sobre la skill).
+- **"Aprendido en vídeos anteriores"**: se va llenando cuando algo funcione.

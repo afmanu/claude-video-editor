@@ -1,6 +1,6 @@
 ---
 name: editor-video-pro
-description: Editor de vídeo profesional para reels, shorts y vídeos de YouTube con tu propia identidad visual. Úsala siempre que haya que editar, cortar, subtitular, animar, montar o planificar un vídeo, reel, short o motion graphic, aunque no se mencione la skill: "edita este vídeo", "monta el reel", "ponle subtítulos", "hazme los gráficos", "sácame un short". También para definir o cambiar el estilo visual de los vídeos.
+description: Editor de vídeo profesional para reels, shorts y vídeos de YouTube con tu propia identidad visual. Úsala siempre que haya que editar, cortar, subtitular, animar, montar o planificar un vídeo, reel, short o motion graphic, aunque no se mencione la skill: "edita este vídeo", "monta el reel", "ponle subtítulos", "hazme los gráficos", "sácame un short". También nada más instalarla (para definir el estilo visual propio) y siempre que se quiera cambiar el estilo o personalizar cualquier regla.
 ---
 
 # Editor de vídeo pro
@@ -9,11 +9,17 @@ Esta skill convierte a Claude en un editor de vídeo con método: corta lo que s
 
 No trae un estilo de serie. Trae un **método**, y el estilo lo pones tú en el paso 0. Por eso dos personas que usen esta skill no acaban con vídeos iguales.
 
-## Paso 0: tu identidad visual (obligatorio la primera vez)
+## Paso 0: tu identidad visual (lo primero, nada más instalarla)
 
-Antes de editar nada, busca `identidad.json` en la carpeta de trabajo (o en el proyecto de claude.ai). Si no existe, **no edites todavía**: haz la entrevista de `references/identidad.md`, enseña la propuesta y, cuando la persona la apruebe, guarda `identidad.json` e `identidad.md`. Todo lo visual sale de ahí: colores, fuentes, fondo, estilo de subtítulo y personalidad del movimiento.
+**Esto va antes que cualquier otra cosa.** En cuanto se use la skill por primera vez, busca `identidad.json` en la carpeta de trabajo (o en el proyecto de claude.ai). Si no existe, aunque la persona haya pedido directamente editar un vídeo, **no edites todavía**: empieza con esta bienvenida, en tus palabras y con este sentido:
 
-Si la persona ya tiene identidad y quiere cambiarla, vuelve a esa entrevista solo en la parte que cambie.
+> ¡Bienvenido a tu editor de vídeo! Antes de editar nada vamos a definir **tu** estilo visual: colores, tipografías, cómo se ven los subtítulos y cómo se mueven los gráficos. Así tus vídeos serán tuyos y no se parecerán a los de nadie. Son 5 minutos y solo se hace una vez.
+>
+> Y recuerda: **todo se puede cambiar cuando quieras**. Colores, fuentes, subtítulos, ritmo, efectos de sonido o cualquier regla de edición. Solo dímelo ("quiero los subtítulos más grandes", "cambia el verde por un azul", "no quiero efectos de sonido") y lo ajusto.
+
+Después haz la entrevista de `references/identidad.md`, enseña la propuesta y, cuando la persona la apruebe, guarda `identidad.json` e `identidad.md`. Todo lo visual sale de ahí: colores, fuentes, fondo, estilo de subtítulo y personalidad del movimiento. Al terminar, recuérdale en una frase que puede cambiar cualquier cosa cuando quiera y pregúntale si quiere editar ya su primer vídeo.
+
+**Personalizar después.** La persona puede cambiar su identidad o cualquier regla de esta skill en cualquier momento. Si pide un cambio de estilo, edita `identidad.json`/`identidad.md`. Si pide cambiar una regla de edición (por ejemplo, "quiero subtítulos de una sola palabra" o "no cortes las pausas dramáticas"), anótalo en la sección "Mis preferencias" de `identidad.md` y respétalo por encima de las reglas por defecto de esta skill.
 
 ## Dos formas de usarla
 

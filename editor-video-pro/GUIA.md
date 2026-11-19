@@ -30,6 +30,12 @@ Claude trabaja dentro de una carpeta de tu ordenador: transcribe, corta, subtitu
 
 Después de instalar ffmpeg, cierra y abre la terminal. Comprueba que todo está con `node -v` y `ffmpeg -version`.
 
+Por último, instala el modelo de transcripción (una sola vez, unos 640 MB; entiende español y funciona en Windows, Mac y Linux):
+
+```
+npx hyperframes models install parakeet
+```
+
 ### Instalar la skill
 
 1. Descomprime `editor-video-pro.zip`.
@@ -45,6 +51,8 @@ Después de instalar ffmpeg, cierra y abre la terminal. Comprueba que todo está
 Mete el vídeo en bruto en la carpeta y dile a Claude:
 
 > Edita brutos/mi-video.mov como reel de 45 segundos. El tema es … y al final quiero pedir que me sigan.
+
+Lo primero que hará Claude, nada más instalarla, es preguntarte por tu estilo (colores, tipografías, subtítulos…). **Todo lo que elijas se puede cambiar después**: basta con pedírselo ("subtítulos más grandes", "cambia el color", "sin efectos de sonido").
 
 Claude te irá enseñando la lista de cortes, el storyboard, una vista previa y un borrador. Revisa cada paso y dile qué cambiar: no avanza sin tu visto bueno.
 

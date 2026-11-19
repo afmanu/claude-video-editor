@@ -22,7 +22,9 @@ fil.push(`${piezas.map((_, k) => `[v${k}][a${k}]`).join("")}concat=n=${piezas.le
 fil.push(`[ac]highpass=f=80,loudnorm=I=-14:TP=-1.5:LRA=11[ao]`);
 guardar("assets/.aroll-filtro.txt", fil.join(";\n"));
 console.log(`Montando ${piezas.length} piezas (${acum.toFixed(1)} s)…`);
-ff(["-i", bruto.ruta, "-filter_complex_script", "assets/.aroll-filtro.txt", "-map", "[vc]", "-map", "[ao]", "-r", String(fps),
-  "-c:v", "libx264", "-crf", "17", "-preset", "medium", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "assets/aroll.mp4"]);
+const salida = ["-map", "[vc]", "-map", "[ao]", "-r", String(fps), "-c:v", "libx264", "-crf", "17", "-preset", "medium", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "assets/aroll.mp4"];
+// ffmpeg 7 o superior lee el filtro de un archivo con -/filter_complex; las versiones anteriores, con -filter_complex_script
+try { ff(["-i", bruto.ruta, "-/filter_complex", "assets/.aroll-filtro.txt", ...salida]); }
+catch { ff(["-i", bruto.ruta, "-filter_complex_script", "assets/.aroll-filtro.txt", ...salida]); }
 guardar("assets/cortes.json", cortes);
 console.log(`assets/aroll.mp4 · ${acum.toFixed(2)} s · ${cortes.length} cortes`);

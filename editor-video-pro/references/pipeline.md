@@ -25,7 +25,7 @@ node <skill>/scripts/preparar.mjs ../brutos/mi-video.mov
 
 - Detecta resolución, fps, duración y pistas de audio.
 - **HDR del iPhone** (HEVC 10 bits, BT.2020): lo convierte a BT.709 cambiando **solo la gama de color**, sin tonemap. El tonemap quema o apaga la piel; reetiquetar sin convertir deja la imagen fría y desaturada.
-- Extrae el audio a WAV mono de 16 kHz y transcribe con `npx hyperframes transcribe` (la primera vez descarga el modelo, unos cientos de MB).
+- Extrae el audio a WAV mono de 16 kHz y transcribe con `npx hyperframes transcribe --engine parakeet` (multilingüe). Si Parakeet no está instalado, el script lo instala (`npx hyperframes models install parakeet`, unos 640 MB la primera vez). No uses Whisper como motor principal: en Windows no se instala solo y los modelos `.en` solo entienden inglés.
 - Lee el texto que imprime y **comprueba que el vídeo habla del tema del brief**. Si no, para y pregunta.
 
 Trampas de la transcripción:
@@ -41,7 +41,8 @@ node <skill>/scripts/aroll.mjs             # monta una primera versión para pod
 node <skill>/scripts/hoja.mjs              # renders/hoja.jpg: cada unión antes · durante · después
 ```
 
-- `cortes.mjs` parte la voz en cada silencio, quita muletillas sueltas ("eh", "em"), tramos que son solo relleno ("bueno", "vale") y tomas repetidas (se queda la última).
+- `cortes.mjs` parte la voz en cada silencio, quita muletillas sueltas ("eh", "em"), tramos que son solo relleno ("bueno", "vale") y tomas repetidas (se queda la última). Dentro de un tramo, si la persona dice una palabra de "otra toma" ("otra", "repito"…) o repite un arranque, se queda con lo que va después. Si la persona usa otra palabra para marcar tomas fallidas, pásala con `--marcas otra,venga`.
+- Aun así, **revisa la propuesta frase a frase**: la detección de repeticiones es aproximada y en brutos largos suele hacer falta ajustar alguna pieza a mano en `assets/piezas.json`.
 - Mira `renders/hoja.jpg`: en cada fila, la persona debe mirar a cámara a ambos lados del corte, sin ojos cerrados ni giros de cabeza. Si no, ajusta `a`/`b` de esa pieza en `assets/piezas.json` o elige otra toma.
 - Si la mirada se va a mitad de una frase que hay que conservar, apúntalo: ese tramo irá en modo `grafico` (voz en off).
 - Enseña `EDL.md` con tu resumen (qué se quita y por qué) y espera la aprobación. Tras cada cambio en `piezas.json`, repite `aroll.mjs` y `hoja.mjs`.

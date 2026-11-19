@@ -32,8 +32,16 @@ export function transcribir(audio, idioma = "es") {
   const tmp = resolve(join(dirname(audio), ".transcripcion"));
   rmSync(tmp, { recursive: true, force: true });
   mkdirSync(tmp, { recursive: true });
-  const r = spawnSync("npx", ["-y", "hyperframes", "transcribe", resolve(audio), "--language", idioma, "-d", tmp, "--json"], { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"], shell: process.platform === "win32", maxBuffer: 1 << 28 });
-  if (r.status !== 0) throw new Error("La transcripción falló. Prueba a mano: npx hyperframes transcribe " + audio + " --language " + idioma);
+  // Parakeet primero: es multilingüe y funciona en Windows. Whisper (el motor de reserva) no se instala solo en Windows.
+  const run = (engine) => spawnSync("npx", ["-y", "hyperframes", "transcribe", resolve(audio), "--language", idioma, "--engine", engine, "-d", tmp, "--json"], { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"], shell: process.platform === "win32", maxBuffer: 1 << 28 });
+  let r = run("parakeet");
+  if (r.status !== 0) {
+    console.log("Parakeet no está disponible; instalándolo (una sola vez, ~640 MB)…");
+    spawnSync("npx", ["-y", "hyperframes", "models", "install", "parakeet"], { stdio: "inherit", shell: process.platform === "win32" });
+    r = run("parakeet");
+  }
+  if (r.status !== 0) r = run("auto");
+  if (r.status !== 0) throw new Error("La transcripción falló. Prueba a mano: npx hyperframes models install parakeet  y después  npx hyperframes transcribe " + audio + " --language " + idioma + " --engine parakeet");
   const f = join(tmp, "transcript.json");
   const src = existsSync(f) ? leer(f) : JSON.parse(r.stdout);
   const words = Array.isArray(src) ? src : src.words || src.transcript?.words || [];
