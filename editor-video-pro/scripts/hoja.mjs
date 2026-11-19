@@ -15,7 +15,9 @@ mkdirSync(tmp, { recursive: true });
 let n = 0;
 tiempos.forEach((t) => [-0.15, 0, 0.15].forEach((d) => {
   const s = Math.min(Math.max(0, t + d), dur - 0.05);
-  ff(["-ss", String(s), "-i", video, "-frames:v", "1", "-vf", `scale=${w > h ? 480 : 270}:-2`, `${tmp}/f${String(n++).padStart(4, "0")}.jpg`]);
+    // Vertical: se recorta la mitad superior (donde está la cara) para que la mirada se distinga sin ampliar
+  const vf = w > h ? "scale=640:-2" : `crop=iw:ih*0.5:0:ih*0.08,scale=540:-2`;
+  ff(["-ss", String(s), "-i", video, "-frames:v", "1", "-vf", vf, `${tmp}/f${String(n++).padStart(4, "0")}.jpg`]);
 }));
 ff(["-framerate", "1", "-i", `${tmp}/f%04d.jpg`, "-vf", `tile=3x${tiempos.length}:padding=6:color=black`, "-frames:v", "1", "renders/hoja.jpg"]);
 rmSync(tmp, { recursive: true, force: true });

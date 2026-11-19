@@ -5,7 +5,21 @@ El método es común; la identidad es de cada uno. Este paso produce dos archivo
 - `identidad.md`: la identidad explicada en palabras, para que cualquier Claude la entienda.
 - `identidad.json`: los valores exactos que usa `scripts/montar.mjs`.
 
-## 1. La entrevista (5 minutos)
+## 1. Tres caminos para empezar
+
+La persona elige cómo darte la información, y se pueden combinar. Los tres llevan al mismo sitio: las tres direcciones del punto 2.
+
+| Camino | Qué recibes | Qué haces |
+|---|---|---|
+| **Cuestionario** | `MI-ESTILO.md` rellenado (en `mi-estilo/` o pegado en el chat) | Cada sección responde a una pregunta de la entrevista. Pregunta solo lo que esté en blanco y sea importante; lo demás, decídelo y dilo |
+| **Referencias** | 2-3 vídeos en `mi-estilo/referencias/` o capturas y enlaces en claude.ai | Analízalos con `referencias.md` y usa los PATRONES para el ritmo, los subtítulos, los gráficos y el movimiento. La paleta y las fuentes nunca salen de ahí |
+| **Entrevista** | Nada preparado | Las 7 preguntas de abajo, en dos o tres mensajes |
+
+Lo mejor es cuestionario más referencias: la persona dice lo que quiere y los vídeos enseñan cómo se ve. En la propuesta, cada dirección dice qué recoge de las referencias, con su prueba (`ref1 @ 2,5`).
+
+Guarda en `identidad.md` una sección **"De dónde sale"**: las respuestas clave del cuestionario y los patrones de las referencias que se usaron. Así, si un día cambia de gusto, se sabe qué tocar.
+
+### La entrevista (5 minutos)
 
 Hazla en dos o tres mensajes, no en un formulario. Si la persona responde "me da igual" a algo, decide tú a partir del resto y dilo.
 
@@ -79,10 +93,14 @@ Valores admitidos por `montar.mjs`:
 - `tema`: `oscuro` | `claro` (solo afecta a sombras y a la viñeta).
 - `fondo.tipo`: `liso` | `degradado` | `reticula` | `puntos` | `lineas`.
 - `tarjeta.estilo`: `cristal` | `solida` | `borde` | `papel`.
-- `subtitulo.estilo`: `pildora` | `color` | `subrayado` | `caja` | `resaltador`. `altura` es la posición vertical (0-1) del centro del subtítulo.
+- `subtitulo.estilo`: `pildora` | `color` | `subrayado` | `caja` | `resaltador`. `altura` es la posición vertical (0-1) del centro del subtítulo en modo cara (por defecto 0,72: por debajo de la boca y dentro de la zona segura). Con `tema: "claro"`, los subtítulos y titulares que van sobre la cara llevan una placa del color de fondo para que se lean.
 - `movimiento`: `suave` (entradas largas, sin rebote), `preciso` (rápido y seco, sin rebote) o `energico` (rápido, con un rebote ligero y más golpes de escala).
 - `fuentes.firma` (opcional): una segunda fuente para una sola palabra por titular, marcada con `*asteriscos*` en el texto.
 
 ## 5. `identidad.md`
 
-Resumen en prosa de media página: quién es, cómo quiere sonar y verse, la tabla de colores con su papel, las fuentes, la firma y la lista de "nunca". Añade al final una sección **"Aprendido en vídeos anteriores"** que se va llenando cuando algo funcione.
+Resumen en prosa de media página: quién es, cómo quiere sonar y verse, la tabla de colores con su papel, las fuentes, la firma y la lista de "nunca". Añade al final estas secciones:
+
+- **"De dónde sale"**: respuestas del cuestionario y patrones de las referencias que se usaron (si los hubo).
+- **"Mis preferencias"**: cambios a las reglas por defecto que pida la persona (mandan sobre la skill).
+- **"Aprendido en vídeos anteriores"**: se va llenando cuando algo funcione.

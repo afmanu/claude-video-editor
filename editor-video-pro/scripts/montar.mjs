@@ -29,7 +29,7 @@ const lum = (hex) => {
 const sobre = (hex) => (lum(hex) > 0.4 ? "#0B0B0C" : "#FFFFFF"); // texto legible encima de un color
 const CLARO = ID.tema === "claro";
 const F = ID.fuentes;
-const SUB = { estilo: "pildora", mayusculas: false, palabras: 3, tamano: 68, altura: 0.64, ...(ID.subtitulo || {}) };
+const SUB = { estilo: "pildora", mayusculas: false, palabras: 3, tamano: 68, altura: 0.72, ...(ID.subtitulo || {}) };
 const FONDO = { tipo: "liso", grano: false, vineta: true, ...(ID.fondo || {}) };
 const TARJ = { estilo: "cristal", radio: 20, ...(ID.tarjeta || {}) };
 
@@ -160,7 +160,7 @@ BEATS.forEach((bt) => {
   const id = "b" + bt.i, M = MODOS[bt.modo] || MODOS.dividida;
   if (!COMP[bt.tipo || "ninguno"]) throw new Error(`Componente desconocido en el beat ${bt.i}: ${bt.tipo}`);
   if (!bt.tipo || bt.tipo === "ninguno") return;
-  H_(`<div class="slot" style="top:${M.cy}px"><div class="cam" id="${id}cam" style="transform:scale(${M.esc})"><div class="in" id="${id}">`);
+  H_(`<div class="slot${bt.modo === "cara" ? " sobre-video" : ""}" style="top:${M.cy}px"><div class="cam" id="${id}cam" style="transform:scale(${M.esc})"><div class="in" id="${id}">`);
   if (bt.etiqueta) H_(`<div class="etq" id="${id}e">${marcar(bt.etiqueta)}</div>`);
   COMP[bt.tipo](bt, id);
   H_(`</div></div></div>`);
@@ -280,6 +280,12 @@ const CAP_ACTIVA = {
   resaltador: `.w { background-image: linear-gradient(color-mix(in srgb, ${C.acento} 75%, transparent), color-mix(in srgb, ${C.acento} 75%, transparent)); background-repeat: no-repeat; background-position: 0 85%; background-size: 0% 0.5em; }`,
   caja: `.cap { background: color-mix(in srgb, ${C.fondo} 88%, transparent); border: 2px solid color-mix(in srgb, ${C.acento} 60%, transparent); border-radius: ${TARJ.radio}px; padding: 10px 26px 16px; width: auto; max-width: 900px; left: 540px; transform: translateX(-50%); }`,
 }[SUB.estilo] || "";
+// Sobre el vídeo, un texto oscuro sin fondo no se lee: con identidad clara, subtítulos y titulares sobre la cara llevan placa
+const PLACA = `background: color-mix(in srgb, ${C.fondo} 92%, transparent); border-radius: ${Math.max(10, TARJ.radio)}px; box-shadow: 0 10px 30px rgba(0,0,0,.18);`;
+const LEGIBLE = [
+  CLARO && SUB.estilo !== "caja" ? `.cap { ${PLACA} padding: 10px 26px 16px; width: auto; max-width: 900px; left: 540px; transform: translate(-50%, -50%); }` : "",
+  `.sobre-video .titular { ${CLARO ? PLACA : `text-shadow: 0 2px 0 rgba(0,0,0,.5), 0 0 22px rgba(0,0,0,.65);`} padding: 18px 28px 24px; }`,
+].join("\n      ");
 
 const page = `<!doctype html>
 <html lang="es" data-resolution="portrait">
@@ -339,6 +345,7 @@ const page = `<!doctype html>
       .w { display: inline-block; margin: 0 0.04em; }
       .w.enf { color: ${C.enfasis}; }
       ${CAP_ACTIVA}
+      ${LEGIBLE}
     </style>
   </head>
   <body>
